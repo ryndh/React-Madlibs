@@ -9,8 +9,10 @@ import Card from './card'
     return (
       <div className='home'>
         <div className='skew'></div>
+        <div className='skew3'></div>
         <Card />
         <div className='skew2'></div>
+        <div className='skew4'></div>
       </div>
     );
   }

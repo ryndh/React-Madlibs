@@ -1,23 +1,52 @@
 // Colors:
-$radius: 10px;
-$btn: green;
-$skew-bg: grey;
-$header-bg: green;
-$header-text: white;
-$num-text: white;
-$non-active-input: grey;
-$card-bg: #f3f2f2;
-$skew-border: green;
-$btn-text: #f3f2f2;
-$btn-click: grey;
-$madlib-text: white;
-$madlib-bg: #292929;
+
+    //Input
+    $input-text: #020205;
+    $input-num-filled:#15CFC0;
+    $num-text: white;
+    $non-active-input: grey;
+
+    //Card
+    $card-bg: #f3f2f2;
+
+    //Skew & BG
+    $skew-bgA: #f0efef;
+    $skew-bgB: #747474;
+    $skew-border: #15CFC0;
+    $middle: #f0efef;
+
+    //Header
+    $header-bg: #747474;
+    $header-text: #f3f2f2;
+
+    //Buttons
+    $btn: #15CFC0;
+    $btn-text: #f3f2f2;
+    $btn-click: #EDCA1B;
+
+    //Completed Madlib
+    $madlib-variable:#EDCA1B;
+    $madlib-text: #f3f2f2;
+    $madlib-bg: #747474;
+
+//Palette
+$grey:       #747474;
+$black:      #020205;
+$dark-green: #124B34;
+$maroon:     #59090E;
+$red:        #C71F15;
+$pale-green: #178777;
+$aqua:       #15CFC0;
+$yellow:     #EDCA1B;
 
 //Misc Styling
-$card-shadow: 0 4px 30px 1px #00000059;
-$btn-shadow: 0 4px 30px 1px #00000059;
-$header-shadow: 0 4px 30px 1px #00000059;
+$radius: 10px;
+$card-shadow: 0 4px 30px 1px rgba(0, 0, 0, 0.349);
+$btn-shadow: 0 4px 30px 1px rgba(0, 0, 0, 0.349);
+$header-shadow: 0 4px 30px 1px rgba(0, 0, 0, 0.349);
 $btn-font-size: 12px;
+$skewA: skewY(-45deg);
+$skewB: skewY(45deg);
 
 //Mixins
 @mixin button {
@@ -34,15 +63,21 @@ $btn-font-size: 12px;
     border-style: none;
     margin-bottom: 10px;
 }
-@mixin skew {
-    z-index:-10;
-    background-color: $skew-bg;
-    border-bottom: 15px solid $skew-border;
+@mixin skewA {
+    z-index:-20;
+    background-color: $skew-bgA;
     position: fixed;
-    z-index: -10;
     height: 60vh;
     width: 100vw;
-    transform: skewY(-45deg);
+    transform: $skewA;
+}
+@mixin skewB {
+    z-index:-10;
+    background-color: $skew-bgB;
+    position: fixed;
+    height: 60vh;
+    width: 100vw;
+    transform: $skewB;
 }
 
 
@@ -50,6 +85,8 @@ $btn-font-size: 12px;
 
 //Main Styles
 html {
+    height: 100vh;
+    background-color: $middle;
     font-size: 100%; // 1rem is 10px
     font-family: 'Merriweather Sans', sans-serif;  
 }
@@ -64,6 +101,7 @@ html {
     h1, h3 {
         margin: 3px;
     }
+    margin-top: 30px;
     width: 800px;
     box-shadow: $header-shadow;
     background-color: $header-bg;
@@ -85,13 +123,29 @@ html {
         top: 0;
         left: 0;
         transform-origin: top left;
-        @include skew;
+        border-bottom: 15px solid $skew-border;
+        @include skewA;
     }
     .skew2 {
         bottom: 0;
         right: 0;
         transform-origin: bottom right;
-        @include skew;
+        border-top: 15px solid $skew-border;
+        @include skewA;
+    }
+    .skew3 {
+        top: 0;
+        right: 0;
+        transform-origin: top right;
+        border-bottom: 15px solid $skew-border;
+        @include skewB;
+    }
+    .skew4 {
+        bottom: 0;
+        left: 0;
+        transform-origin: bottom left;
+        border-top: 15px solid $skew-border;
+        @include skewB;
     }
 
 }
@@ -131,28 +185,30 @@ html {
             background-color: $non-active-input;
         }
         .filled {
-            background-color: $btn;
+            background-color: $input-num-filled;
         }
         input {
+            letter-spacing: .5px;
             width: 140px;
             font-size: 14px;
             font-weight: 600;
             overflow: visible;
             text-align: center;
+            color: $input-text;
             grid-column: input-s/input-e;
             background-color: inherit;
             border: none;
             border-bottom: 1.3px solid $non-active-input;
             &:focus {
                 outline: none;
-                border-bottom: 1.3px solid $btn;
+                border-bottom: 1.3px solid $input-num-filled;
                 transition: .3s ease-in-out;
                 &::placeholder {
                     visibility: hidden;
                 }
             }
             &:focus ~ .label {
-                color: $btn;
+                color: $input-num-filled;
                 transition: .3s ease-in-out;
             }
             &::placeholder {
@@ -216,6 +272,8 @@ html {
     }
   
     .completed-wrap {
+        border: 1.5px solid $skew-border;
+        box-shadow: $card-shadow;
         font-size: 1.2em;
         display: grid;
         justify-items: center;
@@ -238,7 +296,7 @@ html {
     }
     .madlib-shown {
         .madlib-variable {
-            color: $btn;
+            color: $madlib-variable;
         }
         z-index: 2;
     }
