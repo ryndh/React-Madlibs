@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Header = () => {
+const Header = props => {
     return (
     <div className='header'> 
-        <h1>React Madlibs</h1>
-        <h3>Fill out the form below to create your madlib</h3>
+        <h1>Random React Madlibs</h1>
+        <h3>{props.title}</h3>
     </div>
     )
 }

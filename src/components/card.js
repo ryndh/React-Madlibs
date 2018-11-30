@@ -2,64 +2,65 @@ import React, { Component } from 'react'
 
 import Input from './input';
 import Content from './content';
+import { INITIAL_STATE } from './madlibs';
+import Header from './header'
 
-const INITIAL_STATE = {
-    color: ['Color', ''],
-    pluralNoun: ['Plural Noun', ''],
-    adjectiveOne: ['Adjective', ''],
-    celebOne: ['Celebrity', ''],
-    adjectiveTwo: ['Adjective', ''],
-    nounOne: ['Noun', ''],
-    numberOne: ['Number', ''],
-    numberTwo: ['Number', ''],
-    nounTwo: ['Noun', ''],
-    adjectiveThree: ['Adjective', ''],
-    celebTwo: ['Celebrity', ''],
-    celebThree: ['Celebrity', ''],
-    adjectiveFour: ['Adjective', ''],
-    nounThree: ['Noun', ''],
-    celebFour: ['Celebrity', ''],
-    adjectiveFive: ['Adjective', ''],
-}
 
 class Card extends Component {
     constructor() {
         super()
 
-        this.state = INITIAL_STATE;
+        this.state = INITIAL_STATE["1"];
     }
 
     render() {
         let html = []
         let i = 1
         for (let objkey in this.state) {
-            if (objkey != "contentVisible") {
+            if (objkey != "contentVisible" && objkey != "title" && this.state[objkey][1] != "false" ) {
                 html.push(<Input key={i} index={i} placeholder={this.state[objkey][0]} label={this.state[objkey][0]} state={this.state[objkey][1]} onChange={(event) => this.setState({[objkey]: [[this.state[objkey][0]], event.target.value]})}/>)
                 i++
             }
         }
 
         return (
-            <form onSubmit={(event) => {
-                    event.preventDefault();
-                    let results = document.getElementsByClassName("completed-madlib")[0].textContent;
-                    alert(results)
-                    }
-                } onReset={() => {
-                    event.preventDefault();
-                    this.setState(INITIAL_STATE); 
-                }}>
+            <div>
+            <Header title={this.state.title}/>
+                <form onSubmit={(event) => {
+                        event.preventDefault();
+                        if (!this.state.contentVisible) {
+                            this.setState({contentVisible: !this.state.contentVisible})
+                        }
+                        }
+                    } onReset={() => {
+                        event.preventDefault();
+                        if (this.state.number[0] < 6) {
+                            this.setState(INITIAL_STATE[(this.state.number[0] + 1).toString()])
+                        } else {
+                            this.setState(INITIAL_STATE["1"])
+                        }
+                        
+                    }}>
 
-                <div className="card">
-                    {html}  
-               </div>
-                <div className="results">
-                    <button type="submit" className="buttons">Generate</button>
-                    <button type="reset" className="buttons">Clear Form</button>
-                    <Content data={this.state}/>
-               </div>
+                    <div className={this.state.contentVisible ? "card-hidden": "card-shown"}>
+                        {html}  
+                </div>
+                    <div className="results">
+                    <div className="buttons">
+                        <div className='left-buttons'>
+                        <button type="submit" className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Generate</button>
+                        <button type="button" onClick={() => this.setState(INITIAL_STATE[this.state.number[0].toString()])} className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Reset</button>
+                        </div>
+                        <div className='right-buttons'>
+                        <button type="button" onClick={() => this.state.number[0] < 2 ? this.setState(INITIAL_STATE["6"]) : this.setState(INITIAL_STATE[(this.state.number[0] - 1).toString()])} className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Previous Madlib</button>
+                        <button type="reset" className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Next Madlib</button>
+                        </div>
+                    </div>
+                    <Content storykey={this.state.number[0].toString()} close={() => this.setState({contentVisible: !this.state.contentVisible})} linkName={this.state.contentVisible ? "completed-wrap madlib-shown" : "completed-wrap madlib-hidden"} data={this.state}/>
+                </div>
 
-            </form>
+                </form>
+            </div>
         )
     }
 }
