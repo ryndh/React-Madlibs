@@ -52,8 +52,8 @@ class Card extends Component {
                         <button type="button" onClick={() => this.setState(INITIAL_STATE[this.state.number[0].toString()])} className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Reset</button>
                         </div>
                         <div className='right-buttons'>
-                        <button type="button" onClick={() => this.state.number[0] < 2 ? this.setState(INITIAL_STATE["6"]) : this.setState(INITIAL_STATE[(this.state.number[0] - 1).toString()])} className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Previous Madlib</button>
-                        <button type="reset" className={this.state.contentVisible ? "buttons-hidden" : "buttons-shown"}>Next Madlib</button>
+                        <button type="button" onClick={() => this.state.number[0] < 2 ? this.setState(INITIAL_STATE["6"]) : this.setState(INITIAL_STATE[(this.state.number[0] - 1).toString()])} className={this.state.contentVisible | this.state.number[0].toString() == '1' ? "buttons-hidden" : "buttons-shown"}>Previous Madlib</button>
+                        <button type="reset" className={this.state.contentVisible | this.state.number[0].toString() == "6" ? "buttons-hidden" : "buttons-shown"}>Next Madlib</button>
                         </div>
                     </div>
                     <Content storykey={this.state.number[0].toString()} close={() => this.setState({contentVisible: !this.state.contentVisible})} linkName={this.state.contentVisible ? "completed-wrap madlib-shown" : "completed-wrap madlib-hidden"} data={this.state}/>

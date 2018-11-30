@@ -17,7 +17,7 @@ export const INITIAL_STATE = {
     fourteen: ['Noun', ''],
     fifteen: ['Celebrity', ''],
     sixteen: ['Adjective', ''],
-    title: 'An Odd Baseball Game',
+    title: '#1 - An Odd Baseball Game',
     contentVisible: false,
     number: [1,'false']},
 
@@ -37,7 +37,7 @@ export const INITIAL_STATE = {
     fourteen: ['Vehicle', ''],
     fifteen: ['Name', ''],
     sixteen: ['Adjective', ''],
-    title: "A Rainy Visit...",
+    title: "#2 - A Rainy Visit...",
     contentVisible: false,
     number: [2,'false']},
 
@@ -57,7 +57,7 @@ export const INITIAL_STATE = {
     fourteen: ['Number', ''],
     fifteen: ['Celebrity', 'false'],
     sixteen: ['Adjective', 'false'],
-    title: "La Grande Competition",
+    title: "#3 - La Grande Competition",
     contentVisible: false,
     number: [3,'false']},
 
@@ -77,7 +77,7 @@ export const INITIAL_STATE = {
     fourteen: ['Vehicle', "false"],
     fifteen: ['Name', "false"],
     sixteen: ['Adjective', "false"],
-    title: "Perserverant Little Guy",
+    title: "#4 - Perserverant Little Guy",
     contentVisible: false,
     number: [4,'false']},
 
@@ -97,7 +97,7 @@ export const INITIAL_STATE = {
     fourteen: ['', "false"],
     fifteen: ['', "false"],
     sixteen: ['', "false"],
-    title: "Dinnertime",
+    title: "#5 - Dinnertime",
     contentVisible: false,
     number: [5,'false']},
 
@@ -117,7 +117,7 @@ export const INITIAL_STATE = {
     fourteen: ['', "false"],
     fifteen: ['', "false"],
     sixteen: ['', "false"],
-    title: "Playground",
+    title: "#6 - Playground",
     contentVisible: false,
     number: [6, 'false']},
 

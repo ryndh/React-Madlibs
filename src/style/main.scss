@@ -16,16 +16,17 @@
     $middle: #f0efef;
 
     //Header
-    $header-bg: #747474;
-    $header-text: #f3f2f2;
+    $header-bg: #edca1bc0;
+    $header-text: #020205;
 
     //Buttons
-    $btn: #15CFC0;
-    $btn-text: #f3f2f2;
+    $btn: #15cfc0b0;
+    $btn-text: #020205;
     $btn-click: #EDCA1B;
 
     //Completed Madlib
     $madlib-variable:#EDCA1B;
+    $madlib-border:#EDCA1B;
     $madlib-text: #f3f2f2;
     $madlib-bg: #747474;
 
@@ -47,6 +48,8 @@ $header-shadow: 0 4px 30px 1px rgba(0, 0, 0, 0.349);
 $btn-font-size: 12px;
 $skewA: skewY(-45deg);
 $skewB: skewY(45deg);
+$skew-height: 55vh;
+$skew-width: 100vw;
 
 //Mixins
 @mixin button {
@@ -57,26 +60,40 @@ $skewB: skewY(45deg);
     background-color: $btn;
     color: $btn-text;
     height: 30px;
-    width: 35%;
+    width: 75%;
     padding: 5px 10px;
     border-radius: $radius;
     border-style: none;
     margin-bottom: 10px;
+    &:hover {
+        background-color: #15CFC0;
+        transition: .5s ease-in-out;
+    }
+    &:active {
+        transition: ease-in-out;
+        background-color: $btn-click;
+    }
+}
+@mixin button-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    width: 100%;
 }
 @mixin skewA {
     z-index:-20;
     background-color: $skew-bgA;
     position: fixed;
-    height: 60vh;
-    width: 100vw;
+    height: $skew-height;
+    width: $skew-width;
     transform: $skewA;
 }
 @mixin skewB {
     z-index:-10;
     background-color: $skew-bgB;
     position: fixed;
-    height: 60vh;
-    width: 100vw;
+    height: $skew-height;
+    width: $skew-width;
     transform: $skewB;
 }
 
@@ -99,10 +116,12 @@ html {
 
 .header {
     h1, h3 {
-        margin: 3px;
+        margin: 3px 0px;
     }
     margin-top: 30px;
-    width: 800px;
+    margin-bottom: 15px;
+    padding: 0px 20px;
+    width: 60vw;
     box-shadow: $header-shadow;
     background-color: $header-bg;
     border-radius: $radius;
@@ -111,7 +130,6 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
 }
 
 .home {
@@ -151,13 +169,13 @@ html {
 }
 
 .card-shown {
-    width: max-content;
     overflow: visible;
+    padding: 0px 20px;
     background-color: $card-bg;
     box-shadow: $card-shadow;
     border-radius: $radius;
     display: grid;
-    grid-auto-rows: min-content;
+    grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(4, 1fr);
     .input-wrap {
         height: 150px;
@@ -222,7 +240,7 @@ html {
 }
 
 .card-hidden * {
-    visibility: hidden;
+    display: none;
 }
 
 .results {
@@ -233,30 +251,22 @@ html {
     justify-content: center;
     .buttons {
         display: grid;
-        grid-gap: 100px;
+        grid-gap: 75px;
         grid-template-columns: 1fr 1fr;
         width: 100%;
         justify-items: center;
         .left-buttons {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
+            @include button-display;
             .buttons-hidden {
                 visibility: hidden;
             }
             .buttons-shown {
                 @include button;
-                &:active {
-                    transition: ease-in-out;
-                    background-color: $btn-click;
-                    
-                }
+              
             }
         }
         .right-buttons {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
+          @include button-display;
             .buttons-hidden {
                 visibility: hidden;
             }
@@ -264,25 +274,21 @@ html {
                 @include button;
                 &:active {
                     transition: ease-in-out;
-                    background-color: $btn-click;
-                    
+                    background-color: $btn-click; 
                 }
             }
         }
     }
   
     .completed-wrap {
-        border: 1.5px solid $skew-border;
+        border: 3px solid $madlib-border;
         box-shadow: $card-shadow;
         font-size: 1.2em;
         display: grid;
         justify-items: center;
         align-items: center;
         letter-spacing: 1px;
-        position: fixed;
         background-color: $madlib-bg;
-        top: 25vh;
-        left:20vw;
         padding: 20px;
         border-radius: $radius;
         color: $madlib-text;
@@ -292,6 +298,9 @@ html {
             background-color: $btn;
             padding: 3px 10px;
             border-radius: $radius;
+            &:active {
+                background-color: $btn-click;
+            }
         }
     }
     .madlib-shown {
