@@ -17,7 +17,7 @@ export const INITIAL_STATE = {
     fourteen: ['Number', ''],
     fifteen: ['Celebrity', 'false'],
     sixteen: ['Adjective', 'false'],
-    title: "#1 - La Grande Competition",
+    title: "#1 - The Grand Competition",
     contentVisible: false,
     number: [1,'false']},
 
