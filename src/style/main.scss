@@ -280,7 +280,7 @@ html {
                 color: $non-active-input;
                 text-align: center;
                 @include phone {
-                    line-height: 0px;
+                    line-height: normal;
                 }
             }
         }
