@@ -37,7 +37,7 @@ export const INITIAL_STATE = {
     fourteen: ['Vehicle', ''],
     fifteen: ['Name', ''],
     sixteen: ['Adjective', ''],
-    title: "#2 - A Rainy Visit...",
+    title: "#2 - A Rainy Visit",
     contentVisible: false,
     number: [2,'false']},
 
