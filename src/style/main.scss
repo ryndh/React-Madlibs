@@ -207,7 +207,7 @@ html {
         justify-items: center;
         grid-template-columns: [number-s] 26px [number-e input-s] 1fr [input-e];
         @include phone {
-            height: 60px;
+            height: 50px;
             display: flex;
             align-items: center;
         }
