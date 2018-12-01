@@ -26,7 +26,7 @@ class Card extends Component {
         return (
             <div className="form-wrap">
             <Header title={this.state.title}/>
-                <form className='form' onKeyPress={event => event.preventDefault()} onSubmit={(event) => {
+                <form className='form' onKeyDown={event => {if (event.keyCode == 13){event.preventDefault()}}} onSubmit={(event) => {
                         event.preventDefault();
                         if (!this.state.contentVisible) {
                             this.setState({contentVisible: !this.state.contentVisible})
