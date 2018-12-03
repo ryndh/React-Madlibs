@@ -348,7 +348,10 @@ html {
                     grid-template-columns: 1fr;
               }
                 .buttons-hidden {
-                    display: none;
+                    visibility: hidden;
+                    @include phone {
+                        display: none;
+                    }
                 }
                 .buttons-shown {
                     @include button;
